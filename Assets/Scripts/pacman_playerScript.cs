@@ -7,9 +7,9 @@ using UnityEngine;
 public class pacman_playerScript : MonoBehaviour
 {
     public GameObject pacman;
-    public int score;
     public float playerSpeed = 1;
-    public int pacLifes;
+    private int score;
+    private int pacLifes;
 
     private inGameManager inGameManager;
 
@@ -34,17 +34,16 @@ public class pacman_playerScript : MonoBehaviour
     private bool invulnerable = false;
     private float timeToInvulnerableLeft;
     private Color mainColor;
+    private Renderer rend;
     void Start() {
         rig = GetComponent<Rigidbody>();
-
         savedPlayerSpeed = playerSpeed;
-        score = 0;
-        pacLifes = 3;
         inGameManager = GameObject.FindGameObjectWithTag("inGameManager").GetComponent<inGameManager>();
 
         inGameManager.setScoreText(score);
         inGameManager.setLifeText(pacLifes);
-        mainColor = gameObject.GetComponent<Renderer>().material.color;
+        rend = GetComponent<Renderer>();
+        mainColor = rend.material.color;
     }
 
     void MoveAlwaysForward() {
@@ -114,7 +113,7 @@ public class pacman_playerScript : MonoBehaviour
         Debug.Log("hunter: " + hunter);
         timeToHuntLeft = durationOfHunting;
         setGhostToHunted(true);
-        gameObject.GetComponent<Renderer>().material.color = Color.blue;
+        rend.material.color = Color.blue;
     }
 
     private void trackHunting() {
@@ -124,7 +123,7 @@ public class pacman_playerScript : MonoBehaviour
                 timeToHuntLeft -= Time.deltaTime;
             } else {
                 hunter = false;
-                gameObject.GetComponent<Renderer>().material.color = mainColor;
+                rend.material.color = mainColor;
                 setGhostToHunted(false);
                 Debug.Log("hunter: " + hunter);
             }
@@ -169,5 +168,17 @@ public class pacman_playerScript : MonoBehaviour
 
 
         }
+    }
+
+    public int getLifes() {
+        return pacLifes;
+    }
+    public int getScore() {
+        return score;
+    }
+
+    public void restoreData(int lifes, int score) {
+        pacLifes = lifes;
+        this.score = score;
     }
 }

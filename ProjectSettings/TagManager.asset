@@ -3,7 +3,22 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - finalScoreTag
+  - wall
+  - ResetScoreButton
+  - Stair
+  - cherry
+  - StartGameButton
+  - CameraController
+  - ExitGameButton
+  - ghost
+  - Lifes-UI
+  - Score-UI
+  - HighScoreMainMenu
+  - MainCanvas
+  - dot
+  - GameManager
   layers:
   - Default
   - TransparentFX

@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 using UnityEditor.Build.Player;
 using UnityEngine.UI;
 using Unity.VisualScripting;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class GameManager : MonoBehaviour
 {
@@ -19,12 +20,13 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     int mainMenuScene;
 
-    [SerializeField]
-    private GameObject settingsCanvas; // canvas
 
     private TextMeshProUGUI highScore;
     private Button startButton, settingsButton, exitGameButton, resetScoreButton, closeSettingsButton;
 
+    private int tempScore;
+    private int tempLifes;
+    private bool reenteredScene = false;
 
 
     private void Awake() {
@@ -32,7 +34,7 @@ public class GameManager : MonoBehaviour
 
         if (instanceGM == null) {
             instanceGM = this;
-            DontDestroyOnLoad(gameObject); // l�d das gameObject mit in die n�chste Scene anstatt es zu zerst�ren, Object das this skript h�lt
+            DontDestroyOnLoad(gameObject); //
         } else {
             Destroy(gameObject);
         }
@@ -40,30 +42,19 @@ public class GameManager : MonoBehaviour
         //settingsCanvas = GameObject.FindGameObjectWithTag("SettingsCanvas");
         highScore = GameObject.FindGameObjectWithTag("HighScoreMainMenu").GetComponent<TextMeshProUGUI>();
 
-
         instanciateScoreboard();
-        settingsCanvas.SetActive(false);
+        SceneManager.activeSceneChanged += restoreScore;
+
 
     }
-
 
     public void onClickStartGame() {
         SceneManager.LoadScene(mainGameScene);
     }
 
-    public void onClickSettings() { // unused
-        Debug.Log("onClicked Settings called");
-        if (settingsCanvas == null) {
-            Debug.Log("settings is null!"); // look at pausemenu in inGameManager -> same logic but working 
-        }
-        settingsCanvas.SetActive(true);      // settings are null, but why
 
-    }
     public void onClickQuitGame() { // just works if the application was built (not if started in unity)
         Application.Quit();
-    }
-    public void onClickCloseSettings() { // unused 
-        settingsCanvas.SetActive(false);
     }
 
     public void onClickResetHighscore() {
@@ -97,24 +88,45 @@ public class GameManager : MonoBehaviour
         updateScoreboard(highscore);
     }
 
-    // unused
-    private void instanciateButtons() {
-        Debug.Log("instanciateButtons called");
-        startButton = GameObject.FindGameObjectWithTag("StartGameButton").GetComponent<Button>();
 
-        startButton.onClick.AddListener(onClickStartGame);
 
-        settingsButton = GameObject.FindGameObjectWithTag("SettingsButton").GetComponent<Button>();
-        settingsButton.onClick.AddListener(onClickSettings);
-
-        exitGameButton = GameObject.FindGameObjectWithTag("ExitGameButton").GetComponent<Button>();
-        exitGameButton.onClick.AddListener(onClickQuitGame);
-
-        resetScoreButton = GameObject.FindGameObjectWithTag("ResetScoreButton").GetComponent<Button>();
-        resetScoreButton.onClick.AddListener(onClickResetHighscore);
-
-        closeSettingsButton = GameObject.FindGameObjectWithTag("closeSettingsButton").GetComponent<Button>();
-        closeSettingsButton.onClick.AddListener(onClickCloseSettings);
+    ////////////safe Score on reenter a new floor //////////
+    public void safeTempScore(int highscore, int lifes) {
+        tempScore += highscore;
+        tempLifes = lifes;
+        Debug.Log("score safed: " + tempScore);
     }
+
+    public void restoreScore(Scene old, Scene current) {
+        Debug.Log("new active Scene: " + current.name);
+        if (current.name == "direct_gameStart") {
+            Debug.Log("entered GameStartscene");
+            reenteredScene = true;
+        } else if (current.name == "main_menu") {
+            resetData();
+            reenteredScene = false;
+        }
+
+    }
+
+    public void resetData() {
+        tempScore = 0;
+        tempLifes = 3;
+    }
+
+    private void Update() {
+        if (reenteredScene) {
+            pacman_playerScript pps = GameObject.FindGameObjectWithTag("Player").GetComponent<pacman_playerScript>();
+            pps.restoreData(tempLifes, tempScore);
+            Debug.Log("pacman recieved new Score: " + pps.getScore());
+            Debug.Log("pacman recieved new Lifes: " + pps.getLifes());
+            inGameManager inGameManager = GameObject.FindGameObjectWithTag("inGameManager").GetComponent<inGameManager>();
+            inGameManager.setScoreText(pps.getScore());
+            inGameManager.setLifeText(pps.getLifes());
+            reenteredScene = false;
+        }
+    }
+
+
 
 }
