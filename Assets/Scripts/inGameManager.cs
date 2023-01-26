@@ -59,6 +59,7 @@ public class inGameManager : MonoBehaviour
     public void restartGame() {
         ReturnToGame();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        gameManager.resetData();
     }
     // called on button "back to main"
     public void backToMainMenu() {
