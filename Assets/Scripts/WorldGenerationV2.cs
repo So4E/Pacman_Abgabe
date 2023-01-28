@@ -49,7 +49,7 @@ public class WorldGenerationV2 : MonoBehaviour
             //floorDensityMap = new float[5]{floorDensity_f1,floorDensity_f2,floorDensity_f3,floorDensity_f4,floorDensity_f5};
             GenerateWorld();
         }else{
-            Debug.LogError("PAUL_ERROR: Can not generate world, there are either not enough prefab models or the once provided failed to load -> Tom check your folder structur");
+            Debug.LogError("PAUL_ERROR: Cannot generate world, there are either not enough prefab models or the ones provided failed to load -> check your folder structure");
         }
 
         // apply global scale

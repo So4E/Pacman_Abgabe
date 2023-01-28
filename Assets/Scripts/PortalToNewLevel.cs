@@ -7,6 +7,12 @@ using UnityEngine.SceneManagement;
 public class PortalToNewLevel : MonoBehaviour
 {
 
+    void Update()
+    {
+        Vector3 axis = new Vector3(0, 1, 0);
+        transform.Rotate(axis, 20 * Time.deltaTime);
+    }
+
     private void OnTriggerEnter(Collider other) {
         if (other.gameObject.CompareTag("Player")) {
             GameManager gm = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
