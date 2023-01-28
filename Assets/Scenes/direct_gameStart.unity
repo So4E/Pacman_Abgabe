@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 1202498269}
-  m_IndirectSpecularColor: {r: 0.016831793, g: 0.033403352, b: 0.05889727, a: 1}
+  m_IndirectSpecularColor: {r: 0.01676594, g: 0.03336414, b: 0.058903873, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -192,11 +192,15 @@ PrefabInstance:
       objectReference: {fileID: 1059884821}
     - target: {fileID: 4441083234360675479, guid: ab7d8c36a3da01d4883dee51ac69c52f, type: 3}
       propertyPath: maxGhosts
-      value: 50
+      value: 44
+      objectReference: {fileID: 0}
+    - target: {fileID: 4441083234360675479, guid: ab7d8c36a3da01d4883dee51ac69c52f, type: 3}
+      propertyPath: ghostDelay
+      value: 7.9
       objectReference: {fileID: 0}
     - target: {fileID: 4441083234360675479, guid: ab7d8c36a3da01d4883dee51ac69c52f, type: 3}
       propertyPath: coinDensity
-      value: 100
+      value: 85.8
       objectReference: {fileID: 0}
     - target: {fileID: 4441083234360675479, guid: ab7d8c36a3da01d4883dee51ac69c52f, type: 3}
       propertyPath: globalScale
@@ -204,11 +208,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4441083234360675479, guid: ab7d8c36a3da01d4883dee51ac69c52f, type: 3}
       propertyPath: portalCount
-      value: 12
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4441083234360675479, guid: ab7d8c36a3da01d4883dee51ac69c52f, type: 3}
       propertyPath: cherryChance
-      value: 2.3
+      value: 7.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ab7d8c36a3da01d4883dee51ac69c52f, type: 3}
@@ -843,7 +847,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1056342955551296618, guid: 5e6db2a1f4e760d41a0595948c6495cf, type: 3}
       propertyPath: openess
-      value: -0.049
+      value: -0.112
       objectReference: {fileID: 0}
     - target: {fileID: 1056342955551296618, guid: 5e6db2a1f4e760d41a0595948c6495cf, type: 3}
       propertyPath: rootNode
