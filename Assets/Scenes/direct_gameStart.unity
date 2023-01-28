@@ -861,6 +861,10 @@ PrefabInstance:
       propertyPath: globalScale
       value: 0.15
       objectReference: {fileID: 0}
+    - target: {fileID: 1056342955551296618, guid: 5e6db2a1f4e760d41a0595948c6495cf, type: 3}
+      propertyPath: pathToWorldGenerationPrefabs
+      value: WorldGenerationTileSetV2
+      objectReference: {fileID: 0}
     - target: {fileID: 3825200418341327299, guid: 5e6db2a1f4e760d41a0595948c6495cf, type: 3}
       propertyPath: m_RootOrder
       value: 4
