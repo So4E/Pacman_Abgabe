@@ -24,7 +24,7 @@ Pacman sollte so viele Dots wie möglich sammeln -> geben Punkte
  
  
 
-## Funktion Weltgenerator: World Generation V2 Skript in 
+## Funktion Weltgenerator: World Generation V2 Skript
  
 ### RootNode
 Das Gameobject, welches die Welt als Kind beherbergen wird
@@ -48,7 +48,7 @@ Ermöglicht das verschiedene Dimension von Bodenkacheln(In verschiedenen Tileset
 Abstand zwischen den Ebenen
 
 ### PathToWorldGenerationPrefab
-Der Pfad zu dem Ordner in dem sich die Prefabs befinden die zur Generierung der Welt genutzt werden sollen, so lässt sich die Erscheinung der Welt schnell ändern.
+Der Pfad zu dem Ordner in dem sich die Prefabs befinden die zur Generierung der Welt genutzt werden sollen, so lässt sich die Erscheinung der Welt schnell ändern und ist modular austauschbar.
  
  ## Quellen
 
