@@ -1,5 +1,54 @@
 # Pacman3D
  
+## Spiel bitte über Scene: "main_menu" starten 
+Szene startet dann automatisch im Main Screen und öffnet die game-Szene bei Klick auf 'Start Game'. Wenn diese direkt geöffnet wird, sind einige Funktionalitäten wie Persistierung des Scores nicht verfügbar.
+
+## Steuerung
+Pacman kann über A und D oder die rechte und linke Pfeiltaste gesteuert werden
+Beim Drücken der Leerzeichen-Taste ändert sich die Ansicht zu einer Top-View, die solange verfügbar ist, wie der Balken am unteren Bildschirmrand angezeigt wird. Ist dieser leer, ändert sich die View automatisch wieder und man muss warten, bis der Balken sich wieder aufgeladen hat. (Faktor ist hier die Zeit)
+
+### Pacman 
+Hat drei Leben.
+
+### Geister
+Trifft ein Geist Pacman, verliert er ein Leben.
+
+### Kirschen
+Frisst Pacman eine Kirsche kann er Geister für eine bestimmte Zeit fressen
+
+### Dots 
+Pacman sollte so viele Dots wie möglich sammeln -> geben Punkte
+
+### Portale (grün)
+Über Portale kann sich Pacman in einen neu generierten Raum/ eine neue Welt teleportieren. Die Punkte und Leben bleiben erhalten.
+ 
+ 
+
+## Funktion Weltgenerator: World Generation V2 Skript in 
+ 
+### RootNode
+Das Gameobject, welches die Welt als Kind beherbergen wird
+
+###Levelsize
+Die Größe der Spielwelt (oben 31x31)
+
+### FloorCount
+Die Anzahl der Ebenen die übereinander generiert werden und mit Treppen/Rampen verbunden werden
+
+### Openess
+Bestimmt wie verschachtelt das Level ist, bei einem Wert von 1 gibt es keine Wände und Hinderniss mehr; bei einem Wert von 0 gibt es die maximale Anzahl an Wänden/Hindernissen die möglich ist ohne das die Welt unbespielbar wird.
+
+### GlobalScale
+Scaliert die gesamte Welt so das Sie auf die Größe von Items/Pacman angepasst werden kann
+
+### XY_offset
+Ermöglicht das verschiedene Dimension von Bodenkacheln(In verschiedenen Tilesets) genutzt werden können, der Offset bestimmt den Abstand vom Center einer Kachel zur nächsten
+
+### Z_offset
+Abstand zwischen den Ebenen
+
+### PathToWorldGenerationPrefab
+Der Pfad zu dem Ordner in dem sich die Prefabs befinden die zur Generierung der Welt genutzt werden sollen, so lässt sich die Erscheinung der Welt schnell ändern.
  
  ## Quellen
 
