@@ -33,7 +33,7 @@ Das Gameobject, welches die Welt als Kind beherbergen wird
 Die Größe der Spielwelt (oben 31x31)
 
 ### FloorCount
-Die Anzahl der Ebenen die übereinander generiert werden und mit Treppen/Rampen verbunden werden
+Die Anzahl der Ebenen die übereinander generiert werden und mit Treppen/Rampen verbunden werden. Derzeit werden 2 zugängliche Ebenen unterstützt.
 
 ### Openess
 Bestimmt wie verschachtelt das Level ist, bei einem Wert von 1 gibt es keine Wände und Hinderniss mehr; bei einem Wert von 0 gibt es die maximale Anzahl an Wänden/Hindernissen die möglich ist ohne das die Welt unbespielbar wird.
@@ -75,17 +75,6 @@ https://docs.unity3d.com/Manual/index.html
 ### Unity scripting api: 
 https://docs.unity3d.com/ScriptReference/index.html
 https://www.youtube.com/watch?v=y7RPVvwjrsA (20.12.22)
-
-### Grid System:
-https://www.youtube.com/watch?v=HbKbxN6Oo6I (12.12.22)
-https://www.youtube.com/watch?v=rKp9fWvmIww (12.12.22)
-https://www.youtube.com/watch?v=G4aAUodsU3o (12.12.22)
-https://www.youtube.com/watch?v=ulFc6p3hQzQ (12.12.22)
-https://www.youtube.com/watch?v=64NblGkAabk (12.12.22)
-
-### Level Generator;
-https://www.youtube.com/watch?v=NtY_R0g8L8E (12.12.22)
-https://www.youtube.com/watch?v=gembmFnhiUs (lighting: 19.12.22)
 
 ### Menü:
 https://www.youtube.com/watch?v=KXFLp3EMBeI&t=2s (20.12.22)
