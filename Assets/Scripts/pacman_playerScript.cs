@@ -19,7 +19,7 @@ public class pacman_playerScript : MonoBehaviour
     Vector3 forward = new Vector3(1, 0, 0);
     Vector3 forwardX = new Vector3(1, 0, 0);
     Vector3 forwardZ = new Vector3(0, 0, 1);
-    Rigidbody rig;
+
 
     // Hunter/////////////////////////////
     [SerializeField]
@@ -36,7 +36,6 @@ public class pacman_playerScript : MonoBehaviour
     private Color mainColor;
     private Renderer rend;
     void Start() {
-        rig = GetComponent<Rigidbody>();
         savedPlayerSpeed = playerSpeed;
         inGameManager = GameObject.FindGameObjectWithTag("inGameManager").GetComponent<inGameManager>();
 
@@ -45,21 +44,20 @@ public class pacman_playerScript : MonoBehaviour
         rend = GetComponent<Renderer>();
         mainColor = rend.material.color;
     }
-
+    //calculate how far to move in a frame
     void MoveAlwaysForward() {
         if (playerSpeed != 0) {
             float howFarToMove = playerSpeed * Time.deltaTime;
             transform.Translate(forward * howFarToMove);
-            // Debug.Log("forward Vector: " + forward);
-            //   rig.AddForce(forward * howFarToMove, ForceMode.Force);
+
         }
     }
-
+    // add points to the score
     public void addPoints(int howMany) {
         score += howMany;
         inGameManager.setScoreText(score);
     }
-
+    //on switch direction set new forward to avoid endless numbers on transform.rotation.y
     private void switchForward() {
         if (forward.x == 1) {
             forward = forwardZ;
@@ -88,9 +86,7 @@ public class pacman_playerScript : MonoBehaviour
         //turn left
         bool onKeyPressedA = Input.GetKeyDown(KeyCode.A);
         bool onKeyPressedArrowLeft = Input.GetKeyDown(KeyCode.LeftArrow);
-
         //---------------------------//
-        //fix/round angle to 90� bases, use LerpAngel or Mathf.Round <-(CAREFUL!)
         if (onKeyPressedA || onKeyPressedArrowLeft) {
             transform.Rotate(axis, -90);
             switchForward();
@@ -106,7 +102,7 @@ public class pacman_playerScript : MonoBehaviour
         isInvulnerableAfterHit();
     }
 
-
+    // after eating a cherry pacman becomes a hunter for a view seconds.
     public void ateCherry() {
         Debug.Log("ate Cherry");
         hunter = true;
@@ -115,7 +111,7 @@ public class pacman_playerScript : MonoBehaviour
         setGhostToHunted(true);
         rend.material.color = Color.blue;
     }
-
+    // logic for the hunting process -> if hes hunter or not
     private void trackHunting() {
         if (hunter) { // performanter
             // keep track of Hunting/last ate cherry
@@ -129,7 +125,7 @@ public class pacman_playerScript : MonoBehaviour
             }
         }
     }
-
+    // inform ghosts they are hunted
     private void setGhostToHunted(bool state) {
         ghosts = GameObject.FindGameObjectsWithTag("ghost");
         for (int i = 0; i < ghosts.Length; i++) {
@@ -147,7 +143,7 @@ public class pacman_playerScript : MonoBehaviour
         }
     }
 
-
+    // stop moving on wallcontact
     void OnCollisionEnter(Collision collision) {
         if (collision.gameObject.CompareTag("wall")) {
             playerSpeed = 0;
@@ -155,7 +151,7 @@ public class pacman_playerScript : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider other) {
-        if (other.gameObject.CompareTag("ghost") && !hunter && !invulnerable) {
+        if (other.gameObject.CompareTag("ghost") && !hunter && !invulnerable) { // loosing a life on Ghostcontact
             invulnerable = true;
             timeToInvulnerableLeft = durationOfInvulnerable;
             pacLifes--;
@@ -163,7 +159,7 @@ public class pacman_playerScript : MonoBehaviour
             if (pacLifes == 0) {
                 inGameManager.gameOver(score);
             }
-        } else if (other.gameObject.CompareTag("ghost") && hunter) {
+        } else if (other.gameObject.CompareTag("ghost") && hunter) { // eating a ghost if pacman is the hunter
             addPoints(100);
 
 
@@ -176,7 +172,7 @@ public class pacman_playerScript : MonoBehaviour
     public int getScore() {
         return score;
     }
-
+    // restore data after reloading the game-Scene
     public void restoreData(int lifes, int score) {
         pacLifes = lifes;
         this.score = score;

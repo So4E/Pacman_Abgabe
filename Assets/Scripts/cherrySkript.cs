@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class cherrySkript : MonoBehaviour
 {
-    private pacman_playerScript player;
+    private pacman_playerScript player; 
 
 
     // Start is called before the first frame update
@@ -21,11 +21,12 @@ public class cherrySkript : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider collider) {
-        //to do -> Pacman wird Jäger, Geister werden zu Gejagten
+    
         if (collider.CompareTag("Player")) {
-            player.ateCherry();
+            // inform player he ate a cherry
+            player.ateCherry(); 
             player.addPoints(200);
-           Destroy(gameObject);
+           Destroy(gameObject); 
         }
     }
 }

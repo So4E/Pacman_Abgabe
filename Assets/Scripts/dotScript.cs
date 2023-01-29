@@ -21,6 +21,7 @@ public class dotScript : MonoBehaviour
     {
         if (collider.gameObject.CompareTag("Player"))
         {
+            // inform player he collects a dot
             Debug.Log("Dot added points.");
             Destroy(this.gameObject);
             player.addPoints(10);

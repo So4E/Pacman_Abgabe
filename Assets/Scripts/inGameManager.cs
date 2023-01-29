@@ -9,10 +9,10 @@ public class inGameManager : MonoBehaviour
 {
 
     [SerializeField] // has to be a canvas !
-     GameObject uiField; // main ui with life and score
+    GameObject uiField; // main ui with life and score
     [SerializeField] // has to be a canvas !
-    GameObject pauseMenu; 
-   // [SerializeField]
+    GameObject pauseMenu;
+    // [SerializeField]
     TextMeshProUGUI lifeUiElement;
     //   [SerializeField]
     TextMeshProUGUI scoreUiElement;
@@ -23,19 +23,20 @@ public class inGameManager : MonoBehaviour
 
     GameManager gameManager;
 
+    private bool pause = false; // paused game or not
 
-    private bool pause = false;
     private void Awake() {
         uiField.SetActive(true);
         pauseMenu.SetActive(false);
         gameOverScreen.SetActive(false);
         gameManager = FindObjectOfType<GameManager>();
         lifeUiElement = GameObject.FindGameObjectWithTag("Lifes-UI").GetComponent<TextMeshProUGUI>(); // null reference if nothing found
-        scoreUiElement= GameObject.FindGameObjectWithTag("Score-UI").GetComponent<TextMeshProUGUI>();
+        scoreUiElement = GameObject.FindGameObjectWithTag("Score-UI").GetComponent<TextMeshProUGUI>();
 
 
     }
     private void Update() {
+        /// pause and unpause
         if (Input.GetKeyDown(KeyCode.Escape) && pause == false) {
             setPauseMenuCanvas(true);
             Time.timeScale = 0; // pause game
@@ -43,12 +44,6 @@ public class inGameManager : MonoBehaviour
             setPauseMenuCanvas(false);
             Time.timeScale = 1f; // unpause game
         }
-        /////////////ONLY FOR DEBUG PURPOSE ////////////////////
-        if (Input.GetKeyDown(KeyCode.K)) {
-            Debug.Log("key K pressed");
-            gameOver(20);
-        }
-        ////////////////////////////////////////////////////////
     }
 
     // called on button "resume"
@@ -56,9 +51,10 @@ public class inGameManager : MonoBehaviour
         setPauseMenuCanvas(false);
         Time.timeScale = 1f;
     }
+    //called on button "restart"
     public void restartGame() {
         ReturnToGame();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name); // reload scene
         gameManager.resetData();
     }
     // called on button "back to main"
@@ -67,9 +63,9 @@ public class inGameManager : MonoBehaviour
         SceneManager.LoadScene(0); //-> id=0 is the reference to the main menu
     }
 
-    /*
- * @param b true = set  canvas on by enter the pause menu || false = return to main game
- */
+
+    // b true = set  canvas on by enter the pause menu || false = return to main game
+
     private void setPauseMenuCanvas(bool b) {
         if (b) {
             pause = true;
@@ -83,7 +79,7 @@ public class inGameManager : MonoBehaviour
     //set score display
     public void setScoreText(int score) {
         scoreUiElement.text = "Score " + score; // irgendwie geht das nicht...
-        
+
     }
     //set Life display
     public void setLifeText(int life) {
@@ -98,13 +94,4 @@ public class inGameManager : MonoBehaviour
         Debug.Log("final Score: " + finalScore.text.ToString());
         gameManager.calculateHighScore(score);
     }
-
-    //////Debug Purpose///////
-    
-    public void onClickTestButton() {
-        Debug.Log("button pressed!");
-    }
-
-
-
 }

@@ -15,9 +15,9 @@ public class GhostScript : MonoBehaviour
 
 
 
-    public bool isHunted;
+    public bool isHunted; // if Ghost is hunted or not
 
-    private Color mainColor;
+    private Color mainColor; // store the main color to restore it after leaving hunting-event
     // Start is called before the first frame update
     void Start() {
 
@@ -28,7 +28,7 @@ public class GhostScript : MonoBehaviour
     void Update() {
         Movement();
         if (!isHunted) {
-            setColor(mainColor); // nicht besonders performant
+            setColor(mainColor); 
         } else {
 
             setColor(Color.blue);
@@ -40,7 +40,6 @@ public class GhostScript : MonoBehaviour
     ////////////////////////////////////
     ///           Movement            //
     ////////////////////////////////////
-
     private void Movement() {
 
         float howFarToMove = ghostSpeed * Time.deltaTime;
@@ -89,7 +88,7 @@ public class GhostScript : MonoBehaviour
     private void OnCollisionEnter(Collision collision) {
 
         if (collision.gameObject.CompareTag("Player")) {
-            //spezifizieren = player
+            
             if (isHunted) {
                 Destroy(this.gameObject);
                 Debug.Log("geist gefressen");
@@ -99,9 +98,9 @@ public class GhostScript : MonoBehaviour
             collision.gameObject.CompareTag("ghost") ||
             collision.gameObject.CompareTag("Stair")) {
             bounceOnWallContact();
-            //normal = hinderniss
+            // ensure right movement
         }
-        //ignoriert = cherrys, dots
+       //ignores cherrys and dots
     }
 }
 

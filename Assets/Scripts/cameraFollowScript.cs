@@ -5,17 +5,15 @@ using UnityEngine;
 
 public class cameraFollowScript : MonoBehaviour
 {
+    //target to be followed
     public Transform target;
-
+    // offest between camera and target
     private Vector3 offset;
     [SerializeField]
-    private bool isTopViewCamera;
+    private bool isTopViewCamera; // camera looks from the top or third person onto the target
 
     [SerializeField, Range(0, 1)]
-    private float rotationDuration;
-
-    private float timeCount;
-
+    private float rotationDuration; // lerp duration 
 
 
     // Start is called before the first frame update
